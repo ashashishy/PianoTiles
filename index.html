@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+       
+      <div data-key="81" class="key">
+          <kbd>Q</kbd>
+          
+        </div>
+        <div data-key="87" class="key">
+          <kbd>W</kbd>
+          
+        </div>
+        <div data-key="69" class="key">
+          <kbd>E</kbd>
+          
+        </div>
+      <div data-key="82" class="key">
+          <kbd>R</kbd>
+          
+        </div>
+        <div data-key="84" class="key">
+          <kbd>T</kbd>
+          
+        </div>
+        <div data-key="89" class="key">
+          <kbd>Y</kbd>
+          
+        </div>
+        <div data-key="85" class="key">
+          <kbd>U</kbd>
+          
+        </div>
+        <div data-key="73" class="key">
+          <kbd>I</kbd>
+          
+        </div>
+        <div data-key="79" class="key">
+          <kbd>O</kbd>
+          
+        </div>
+        <div data-key="80" class="key">
+          <kbd>P</kbd>
+          
+        </div>
+        <div data-key="219" class="key">
+          <kbd>[</kbd>
+         
+        </div>
+        <div data-key="221" class="key">
+          <kbd>]</kbd>
+         
+        </div>
+       
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+     
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+     
+    </div>
+  </div>
+  <audio data-key="81" src="sounds/68437__pinkyfinger__piano-a.wav"></audio>
+  <audio data-key="87" src="sounds/68438__pinkyfinger__piano-b.wav"></audio>
+  <audio data-key="69" src="sounds/68439__pinkyfinger__piano-bb.wav"></audio>
+  <audio data-key="82" src="sounds/68440__pinkyfinger__piano-c.wav"></audio>
+  <audio data-key="84" src="sounds/68441__pinkyfinger__piano-c.wav"></audio>
+  <audio data-key="89" src="sounds/68442__pinkyfinger__piano-d.wav"></audio>
+  <audio data-key="85" src="sounds/68443__pinkyfinger__piano-e.wav"></audio>
+  <audio data-key="73" src="sounds/68444__pinkyfinger__piano-eb.wav"></audio>
+  <audio data-key="79" src="sounds/68445__pinkyfinger__piano-f.wav"></audio>
+  <audio data-key="80" src="sounds/68446__pinkyfinger__piano-f.wav"></audio>
+  <audio data-key="219" src="sounds/68447__pinkyfinger__piano-g.wav"></audio>
+  <audio data-key="221" src="sounds/68448__pinkyfinger__piano-g.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+<script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>
